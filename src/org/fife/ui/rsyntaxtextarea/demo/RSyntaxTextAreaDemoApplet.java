@@ -75,7 +75,9 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 		addItem("C#", CSHARP_SYNTAX_STYLE, bg, menu);
 		addItem("Java", JAVA_SYNTAX_STYLE, bg, menu);
 		addItem("Lua", LUA_SYNTAX_STYLE, bg, menu);
+		addItem("Makefile", MAKEFILE_SYNTAX_STYLE, bg, menu);
 		addItem("Perl", PERL_SYNTAX_STYLE, bg, menu);
+		addItem("Ruby", RUBY_SYNTAX_STYLE, bg, menu);
 		addItem("SQL", SQL_SYNTAX_STYLE, bg, menu);
 		addItem("XML", XML_SYNTAX_STYLE, bg, menu);
 		menu.getItem(2).setSelected(true);
