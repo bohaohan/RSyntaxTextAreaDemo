@@ -1,7 +1,10 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
 import java.awt.event.*;
+import java.net.URL;
+
 import javax.swing.*;
+import javax.swing.event.*;
 
 import org.fife.ui.rsyntaxtextarea.*;
 import org.fife.ui.rtextarea.*;
@@ -14,14 +17,15 @@ import org.fife.ui.rtextarea.*;
  * @version 1.0
  */
 public class RSyntaxTextAreaDemoApplet extends JApplet
-									implements SyntaxConstants {
+							implements HyperlinkListener, SyntaxConstants {
 
 	private RTextScrollPane scrollPane;
 	private RSyntaxTextArea textArea;
 
 	private static final String DEFAULT_TEXT =
 		"package com.mycompany.demo;\n\n" +
-		"/**\n * An example class.\n *\n * @author Your Name\n */\n" +
+		"/**\n * An example class.\n *\n * @author Your Name\n" +
+		" * http://www.example.com\n */\n" +
 		"public class ExampleCode {\n\n" +
 		"   /**\n" +
 		"    * Creates a new example.\n" +
@@ -114,7 +118,22 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 		textArea.restoreDefaultSyntaxHighlightingColorScheme();
 		textArea.setSyntaxEditingStyle(RSyntaxTextArea.JAVA_SYNTAX_STYLE);
 		textArea.setText(DEFAULT_TEXT);
+		textArea.addHyperlinkListener(this);
 		return textArea;
+	}
+
+
+	public void hyperlinkUpdate(HyperlinkEvent e) {
+		if (e.getEventType()==HyperlinkEvent.EventType.ACTIVATED) {
+			URL url = e.getURL();
+			if (url==null) {
+				UIManager.getLookAndFeel().provideErrorFeedback(null);
+			}
+			else {
+				JOptionPane.showMessageDialog(this,
+									"URL clicked:\n" + url.toString());
+			}
+		}
 	}
 
 
