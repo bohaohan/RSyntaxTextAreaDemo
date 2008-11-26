@@ -1,8 +1,9 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
-
 import javax.swing.*;
 import javax.swing.event.*;
 
@@ -22,28 +23,6 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 	private RTextScrollPane scrollPane;
 	private RSyntaxTextArea textArea;
 
-	private static final String DEFAULT_TEXT =
-		"package com.mycompany.demo;\n\n" +
-		"/**\n * An example class.\n *\n * @author Your Name\n" +
-		" * http://www.example.com\n */\n" +
-		"public class ExampleCode {\n\n" +
-		"   /**\n" +
-		"    * Creates a new example.\n" +
-		"    *\n" +
-		"    * @param value A value to use in the example.\n" +
-		"    */\n" +
-		"   public ExampleCode(int value) {\n" +
-		"      this.value = value;\n" +
-		"   }\n\n" +
-		"   public void doWork() {\n" +
-		"      // Very important work gets done here.\n" +
-		"      System.out.println(\"My value is: \" + value + \"\\n\");\n" +
-		"   }\n\n" +
-		"   public static void main(String[] args) {\n" +
-		"      ExampleCode example = new ExampleCode(5);\n" +
-		"      example.doWork();\n" +
-		"   }\n\n}\n";
-
 
 	public RSyntaxTextAreaDemoApplet() {
 
@@ -61,9 +40,10 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 	}
 
 
-	private void addItem(String name, int style, ButtonGroup bg, JMenu menu) {
+	private void addItem(String name, String res, int style, ButtonGroup bg,
+							JMenu menu) {
 		JRadioButtonMenuItem item = new JRadioButtonMenuItem(
-								new ChangeSyntaxStyleAction(name, style));
+							new ChangeSyntaxStyleAction(name, res, style));
 		bg.add(item);
 		menu.add(item);
 	}
@@ -75,16 +55,13 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addItem("C", C_SYNTAX_STYLE, bg, menu);
-		addItem("C#", CSHARP_SYNTAX_STYLE, bg, menu);
-		addItem("Java", JAVA_SYNTAX_STYLE, bg, menu);
-		addItem("Lua", LUA_SYNTAX_STYLE, bg, menu);
-		addItem("Makefile", MAKEFILE_SYNTAX_STYLE, bg, menu);
-		addItem("Perl", PERL_SYNTAX_STYLE, bg, menu);
-		addItem("Ruby", RUBY_SYNTAX_STYLE, bg, menu);
-		addItem("SQL", SQL_SYNTAX_STYLE, bg, menu);
-		addItem("XML", XML_SYNTAX_STYLE, bg, menu);
-		menu.getItem(2).setSelected(true);
+		addItem("C", "CExample.txt", C_SYNTAX_STYLE, bg, menu);
+		addItem("Java", "JavaExample.txt", JAVA_SYNTAX_STYLE, bg, menu);
+		addItem("Perl", "PerlExample.txt", PERL_SYNTAX_STYLE, bg, menu);
+		addItem("Ruby", "RubyExample.txt", RUBY_SYNTAX_STYLE, bg, menu);
+		addItem("SQL", "SQLExample.txt", SQL_SYNTAX_STYLE, bg, menu);
+		addItem("XML", "XMLExample.txt", XML_SYNTAX_STYLE, bg, menu);
+		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
 		menu = new JMenu("View");
@@ -117,9 +94,28 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 		RSyntaxTextArea textArea = new RSyntaxTextArea();
 		textArea.restoreDefaultSyntaxHighlightingColorScheme();
 		textArea.setSyntaxEditingStyle(RSyntaxTextArea.JAVA_SYNTAX_STYLE);
-		textArea.setText(DEFAULT_TEXT);
+		textArea.setText(getText("JavaExample.txt"));
 		textArea.addHyperlinkListener(this);
 		return textArea;
+	}
+
+
+	private String getText(String resource) {
+		ClassLoader cl = getClass().getClassLoader();
+		BufferedReader r = null;
+		try {
+			r = new BufferedReader(new InputStreamReader(
+					cl.getResourceAsStream(resource), "UTF-8"));
+			StringBuffer sb = new StringBuffer();
+			String line = null;
+			while ((line=r.readLine())!=null) {
+				sb.append(line).append('\n');
+			}
+			r.close();
+			return sb.toString();
+		} catch (Exception e) {
+			return "Type here to see syntax highlighting";
+		}
 	}
 
 
@@ -156,14 +152,18 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 
 	private class ChangeSyntaxStyleAction extends AbstractAction {
 
+		private String res;
 		private int style;
 
-		public ChangeSyntaxStyleAction(String name, int style) {
+		public ChangeSyntaxStyleAction(String name, String res, int style) {
 			putValue(NAME, name);
+			this.res = res;
 			this.style = style;
 		}
 
 		public void actionPerformed(ActionEvent e) {
+			textArea.setText(getText(res));
+			textArea.setCaretPosition(0);
 			textArea.setSyntaxEditingStyle(style);
 		}
 

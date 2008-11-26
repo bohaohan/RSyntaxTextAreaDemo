@@ -48,6 +48,7 @@
 		<mkdir dir="${dist-dir}"/>
 		<jar destfile="${dist-dir}/rsyntaxtextarea_demo.jar">
 			<fileset dir="${class-dir}"/>
+			<fileset dir="examples"/>
 			<manifest>
 				<attribute name="Class-Path" value="rsyntaxtextarea.jar"/>
 			</manifest>
@@ -69,6 +70,7 @@
 		<zip destfile="./rsyntaxtextarea_demo_${version}_Source.zip">
 			<fileset dir=".">
 				<include name="src/**"/>
+				<include name="examples/**"/>
 				<include name="build.xml"/>
 			</fileset>
 		</zip>
