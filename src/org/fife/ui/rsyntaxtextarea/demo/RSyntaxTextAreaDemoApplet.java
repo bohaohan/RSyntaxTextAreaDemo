@@ -202,8 +202,8 @@ public class RSyntaxTextAreaDemoApplet extends JApplet
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			textArea.setCurrentLineHighlightEnabled(
-					!textArea.isCurrentLineHighlightEnabled());
+			textArea.setHighlightCurrentLine(
+					!textArea.getHighlightCurrentLine());
 		}
 
 	}
