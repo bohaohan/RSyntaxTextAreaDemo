@@ -21,7 +21,7 @@
 
 
 	<!-- Set global properties for this build. -->
-	<property name="version"          value="1.0"/>
+	<property name="version"          value="1.1"/>
 	<property name="source-dir"       location="src"/>
 	<property name="class-dir"        location="ant-classes"/>
 	<property name="dist-dir"         location="dist"/>
@@ -51,6 +51,8 @@
 			<fileset dir="examples"/>
 			<manifest>
 				<attribute name="Class-Path" value="rsyntaxtextarea.jar"/>
+				<attribute name="Main-Class"
+					value="org.fife.ui.rsyntaxtextarea.demo.RSyntaxTextAreaDemoApp"/>
 			</manifest>
 		</jar>
 	</target>
