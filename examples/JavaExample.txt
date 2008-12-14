@@ -8,6 +8,8 @@ package com.mycompany.demo;
  */
 public class ExampleCode {
 
+   private int value;
+
    /**
     * Creates a new example.
     *
@@ -19,7 +21,7 @@ public class ExampleCode {
 
    public void doWork() {
       // Very important work gets done here.
-      System.out.println("My value is: \" + value + \"");
+      System.out.println("My value is: \"" + value + "\"");
    }
 
    public static void main(String[] args) {

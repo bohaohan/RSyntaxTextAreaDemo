@@ -34,7 +34,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
-	private void addItem(String name, String res, int style, ButtonGroup bg,
+	private void addItem(String name, String res, String style, ButtonGroup bg,
 			JMenu menu) {
 		JRadioButtonMenuItem item = new JRadioButtonMenuItem(
 				new ChangeSyntaxStyleAction(name, res, style));
@@ -49,12 +49,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addItem("C", "CExample.txt", C_SYNTAX_STYLE, bg, menu);
-		addItem("Java", "JavaExample.txt", JAVA_SYNTAX_STYLE, bg, menu);
-		addItem("Perl", "PerlExample.txt", PERL_SYNTAX_STYLE, bg, menu);
-		addItem("Ruby", "RubyExample.txt", RUBY_SYNTAX_STYLE, bg, menu);
-		addItem("SQL", "SQLExample.txt", SQL_SYNTAX_STYLE, bg, menu);
-		addItem("XML", "XMLExample.txt", XML_SYNTAX_STYLE, bg, menu);
+		addItem("C", "CExample.txt", SYNTAX_STYLE_C, bg, menu);
+		addItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVA, bg, menu);
+		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
+		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
+		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -89,7 +89,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	private RSyntaxTextArea createTextArea() {
 		RSyntaxTextArea textArea = new RSyntaxTextArea();
 		textArea.restoreDefaultSyntaxHighlightingColorScheme();
-		textArea.setSyntaxEditingStyle(RSyntaxTextArea.JAVA_SYNTAX_STYLE);
+		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		textArea.setText(getText("JavaExample.txt"));
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
@@ -147,6 +147,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
+					"<br>Version 1.2 (beta)" +
 					"<br>Licensed under the LGPL",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
@@ -158,9 +159,9 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	private class ChangeSyntaxStyleAction extends AbstractAction {
 
 		private String res;
-		private int style;
+		private String style;
 
-		public ChangeSyntaxStyleAction(String name, String res, int style) {
+		public ChangeSyntaxStyleAction(String name, String res, String style) {
 			putValue(NAME, name);
 			this.res = res;
 			this.style = style;
