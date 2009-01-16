@@ -88,7 +88,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 	private RSyntaxTextArea createTextArea() {
 		RSyntaxTextArea textArea = new RSyntaxTextArea();
-		textArea.restoreDefaultSyntaxHighlightingColorScheme();
 		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		textArea.setText(getText("JavaExample.txt"));
 		textArea.setCaretPosition(0);
