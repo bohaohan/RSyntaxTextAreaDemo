@@ -14,7 +14,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 /**
  * The root pane used by the demos.  This allows both the applet and the
- * standalone applet to share the same UI. 
+ * standalone application to share the same UI. 
  *
  * @author Robert Futrell
  * @version 1.0
@@ -93,6 +93,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
+		textArea.setMarkOccurrences(true);
 		return textArea;
 	}
 
