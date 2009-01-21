@@ -74,6 +74,9 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new ToggleAntiAliasingAction());
 		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new MarkOccurrencesAction());
+		cbItem.setSelected(true);
+		menu.add(cbItem);
 		mb.add(menu);
 
 		menu = new JMenu("Help");
@@ -174,6 +177,20 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		}
 
 	}
+
+
+	private class MarkOccurrencesAction extends AbstractAction {
+
+		public MarkOccurrencesAction() {
+			putValue(NAME, "Mark Occurrences");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			textArea.setMarkOccurrences(!textArea.getMarkOccurrences());
+		}
+
+	}
+
 
 /*
  * Currently not used as some token types (i.e. keywords & comments) use a
