@@ -1,5 +1,6 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -29,6 +30,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	public DemoRootPane() {
 		textArea = createTextArea();
 		scrollPane = new RTextScrollPane(500,300, textArea, true);
+try {
+Icon icon = new ImageIcon("img/bookmark.png");
+scrollPane.addLineTrackingIcon(2, icon);
+} catch (Exception e) {
+	e.printStackTrace();
+}
 		getContentPane().add(scrollPane);
 		setJMenuBar(createMenuBar());
 	}
@@ -70,12 +77,17 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new ViewLineNumbersAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new BookmarksAction());
+		cbItem.setSelected(true);
+		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new WordWrapAction());
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new ToggleAntiAliasingAction());
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new MarkOccurrencesAction());
 		cbItem.setSelected(true);
+		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new RtlAction());
 		menu.add(cbItem);
 		mb.add(menu);
 
@@ -93,6 +105,10 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		RSyntaxTextArea textArea = new RSyntaxTextArea();
 		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		textArea.setText(getText("JavaExample.txt"));
+try {
+textArea.read(new java.io.FileReader("../RSyntaxTextArea/src/org/fife/ui/rtextarea/RTextArea.java"), null);
+textArea.addLineHighlight(205, new java.awt.Color(255,240,240));
+} catch (Exception e) { e.printStackTrace(); }
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
@@ -159,6 +175,20 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
+	private class BookmarksAction extends AbstractAction {
+
+		public BookmarksAction() {
+			putValue(NAME, "Bookmarks");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			scrollPane.setIconRowHeaderEnabled(
+							!scrollPane.isIconRowHeaderEnabled());
+		}
+
+	}
+
+
 	private class ChangeSyntaxStyleAction extends AbstractAction {
 
 		private String res;
@@ -218,15 +248,19 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 */
 
-	private class ViewLineHighlightAction extends AbstractAction {
+	private class RtlAction extends AbstractAction {
 
-		public ViewLineHighlightAction() {
-			putValue(NAME, "Current Line Highlight");
+		public RtlAction() {
+			putValue(NAME, "Right-to-Left Orientation");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			textArea.setHighlightCurrentLine(
-					!textArea.getHighlightCurrentLine());
+			if (scrollPane.getComponentOrientation().isLeftToRight()) {
+				scrollPane.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+			}
+			else {
+				scrollPane.applyComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+			}
 		}
 
 	}
@@ -249,6 +283,20 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
+	private class ViewLineHighlightAction extends AbstractAction {
+
+		public ViewLineHighlightAction() {
+			putValue(NAME, "Current Line Highlight");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			textArea.setHighlightCurrentLine(
+					!textArea.getHighlightCurrentLine());
+		}
+
+	}
+
+
 	private class ViewLineNumbersAction extends AbstractAction {
 
 		public ViewLineNumbersAction() {
@@ -257,7 +305,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		public void actionPerformed(ActionEvent e) {
 			scrollPane.setLineNumbersEnabled(
-					!scrollPane.areLineNumbersEnabled());
+					!scrollPane.getLineNumbersEnabled());
 		}
 
 	}
