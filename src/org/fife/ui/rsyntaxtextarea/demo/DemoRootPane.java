@@ -10,6 +10,7 @@ import javax.swing.event.*;
 
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
 
@@ -30,12 +31,10 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	public DemoRootPane() {
 		textArea = createTextArea();
 		scrollPane = new RTextScrollPane(500,300, textArea, true);
-try {
-Icon icon = new ImageIcon("img/bookmark.png");
-scrollPane.addLineTrackingIcon(2, icon);
-} catch (Exception e) {
-	e.printStackTrace();
-}
+		Gutter gutter = scrollPane.getGutter();
+		gutter.setBookmarkingEnabled(true);
+		URL url = getClass().getClassLoader().getResource("bookmark.png");
+		gutter.setBookmarkIcon(new ImageIcon(url));
 		getContentPane().add(scrollPane);
 		setJMenuBar(createMenuBar());
 	}
@@ -105,10 +104,6 @@ scrollPane.addLineTrackingIcon(2, icon);
 		RSyntaxTextArea textArea = new RSyntaxTextArea();
 		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		textArea.setText(getText("JavaExample.txt"));
-try {
-textArea.read(new java.io.FileReader("../RSyntaxTextArea/src/org/fife/ui/rtextarea/RTextArea.java"), null);
-textArea.addLineHighlight(205, new java.awt.Color(255,240,240));
-} catch (Exception e) { e.printStackTrace(); }
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
