@@ -1,6 +1,6 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
-import java.awt.ComponentOrientation;
+//import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -60,7 +60,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_PHP, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -86,8 +86,8 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new MarkOccurrencesAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
-		cbItem = new JCheckBoxMenuItem(new RtlAction());
-		menu.add(cbItem);
+//		cbItem = new JCheckBoxMenuItem(new RtlAction());
+//		menu.add(cbItem);
 		mb.add(menu);
 
 		menu = new JMenu("Help");
@@ -243,6 +243,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 */
 
+/* Removed to keep size of demo applet down
 	private class RtlAction extends AbstractAction {
 
 		public RtlAction() {
@@ -259,7 +260,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		}
 
 	}
-
+*/
 
 	private class ToggleAntiAliasingAction extends AbstractAction {
 
