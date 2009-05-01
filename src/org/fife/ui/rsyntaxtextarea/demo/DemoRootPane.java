@@ -30,7 +30,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 	public DemoRootPane() {
 		textArea = createTextArea();
-		scrollPane = new RTextScrollPane(500,300, textArea, true);
+		scrollPane = new RTextScrollPane(textArea, true);
 		Gutter gutter = scrollPane.getGutter();
 		gutter.setBookmarkingEnabled(true);
 		URL url = getClass().getClassLoader().getResource("bookmark.png");
@@ -101,7 +101,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 
 	private RSyntaxTextArea createTextArea() {
-		RSyntaxTextArea textArea = new RSyntaxTextArea();
+		RSyntaxTextArea textArea = new RSyntaxTextArea(25, 70);
 		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		textArea.setText(getText("JavaExample.txt"));
 		textArea.setCaretPosition(0);
