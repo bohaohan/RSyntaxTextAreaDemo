@@ -16,7 +16,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 
 /**
  * The root pane used by the demos.  This allows both the applet and the
- * standalone application to share the same UI. 
+ * stand-alone application to share the same UI. 
  *
  * @author Robert Futrell
  * @version 1.0
@@ -30,6 +30,8 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 	public DemoRootPane() {
 		textArea = createTextArea();
+		setText("JavaExample.txt");
+		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
 		scrollPane = new RTextScrollPane(textArea, true);
 		Gutter gutter = scrollPane.getGutter();
 		gutter.setBookmarkingEnabled(true);
@@ -60,7 +62,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_PHP, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -100,10 +102,13 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
+	/**
+	 * Creates the text area for this application.
+	 *
+	 * @return The text area.
+	 */
 	private RSyntaxTextArea createTextArea() {
 		RSyntaxTextArea textArea = new RSyntaxTextArea(25, 70);
-		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
-		textArea.setText(getText("JavaExample.txt"));
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
@@ -112,32 +117,19 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
+	/**
+	 * Focuses the text area.
+	 */
 	void focusTextArea() {
 		textArea.requestFocusInWindow();
 	}
 
 
-	private String getText(String resource) {
-		ClassLoader cl = getClass().getClassLoader();
-		BufferedReader r = null;
-		try {
-			r = new BufferedReader(new InputStreamReader(
-					cl.getResourceAsStream(resource), "UTF-8"));
-			StringBuffer sb = new StringBuffer();
-			String line = null;
-			while ((line=r.readLine())!=null) {
-				sb.append(line).append('\n');
-			}
-			r.close();
-			return sb.toString();
-		} catch (RuntimeException re) {
-			throw re; // FindBugs
-		} catch (Exception e) {
-			return "Type here to see syntax highlighting";
-		}
-	}
-
-
+	/**
+	 * Called when a hyperlink is clicked in the text area.
+	 *
+	 * @param e The event.
+	 */
 	public void hyperlinkUpdate(HyperlinkEvent e) {
 		if (e.getEventType()==HyperlinkEvent.EventType.ACTIVATED) {
 			URL url = e.getURL();
@@ -148,6 +140,27 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 				JOptionPane.showMessageDialog(this,
 									"URL clicked:\n" + url.toString());
 			}
+		}
+	}
+
+
+	/**
+	 * Sets the content in the text area to that in the specified resource.
+	 *
+	 * @param resource The resource to load.
+	 */
+	private void setText(String resource) {
+		ClassLoader cl = getClass().getClassLoader();
+		BufferedReader r = null;
+		try {
+			r = new BufferedReader(new InputStreamReader(
+					cl.getResourceAsStream(resource), "UTF-8"));
+			textArea.read(r, null);
+			r.close();
+		} catch (RuntimeException re) {
+			throw re; // FindBugs
+		} catch (Exception e) {
+			textArea.setText("Type here to see syntax highlighting");
 		}
 	}
 
@@ -196,7 +209,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			textArea.setText(getText(res));
+			setText(res);
 			textArea.setCaretPosition(0);
 			textArea.setSyntaxEditingStyle(style);
 		}
