@@ -157,6 +157,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 					cl.getResourceAsStream(resource), "UTF-8"));
 			textArea.read(r, null);
 			r.close();
+			textArea.setCaretPosition(0);
 		} catch (RuntimeException re) {
 			throw re; // FindBugs
 		} catch (Exception e) {
