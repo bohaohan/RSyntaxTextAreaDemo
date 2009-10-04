@@ -78,6 +78,9 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new ViewLineNumbersAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new AnimateBracketMatchingAction());
+		cbItem.setSelected(true);
+		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new BookmarksAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
@@ -179,6 +182,20 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 					"<br>Licensed under the LGPL",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
+		}
+
+	}
+
+
+	private class AnimateBracketMatchingAction extends AbstractAction {
+
+		public AnimateBracketMatchingAction() {
+			putValue(NAME, "Animate Bracket Matching");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			textArea.setAnimateBracketMatching(
+						!textArea.getAnimateBracketMatching());
 		}
 
 	}
