@@ -62,6 +62,7 @@
 			</fileset>
 			<fileset dir="../RSyntaxTextArea/i18n"/>
 			<fileset dir="../RSyntaxTextArea/ant-classes">
+				<include name="org/fife/ui/rsyntaxtextarea/modes/AbstractMarkupTokenMaker.class"/>
 				<include name="org/fife/ui/rsyntaxtextarea/modes/CTokenMaker.class"/>
 				<include name="org/fife/ui/rsyntaxtextarea/modes/JavaTokenMaker.class"/>
 				<include name="org/fife/ui/rsyntaxtextarea/modes/PerlTokenMaker.class"/>
