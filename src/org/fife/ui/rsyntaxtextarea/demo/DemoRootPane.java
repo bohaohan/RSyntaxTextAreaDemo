@@ -1,6 +1,7 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
 //import java.awt.ComponentOrientation;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +11,7 @@ import javax.swing.event.*;
 
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
@@ -67,12 +69,10 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		mb.add(menu);
 
 		menu = new JMenu("View");
-		// JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(new
-		// MonospacedFontAction());
-		// cbItem.setSelected(true);
-		// menu.add(cbItem);
-		JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(
-				new ViewLineHighlightAction());
+		JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(new MonospacedFontAction());
+		cbItem.setSelected(true);
+		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new ViewLineHighlightAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new ViewLineNumbersAction());
@@ -116,6 +116,11 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
 		textArea.setMarkOccurrences(true);
+		textArea.setTextAntiAliasHint("VALUE_TEXT_ANTIALIAS_ON");
+try {
+SyntaxScheme scheme = SyntaxScheme.load(textArea.getFont(), new java.io.FileInputStream("C:/temp/eclipse.xml"));
+textArea.setSyntaxScheme(scheme);
+} catch (Exception e) { e.printStackTrace(); }
 		return textArea;
 	}
 
@@ -248,10 +253,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
-/*
- * Currently not used as some token types (i.e. keywords & comments) use a
- * different font than the default (bold/italic), and I'm too lazy to change
- * all necessary fonts.
 	private class MonospacedFontAction extends AbstractAction {
 
 		private boolean selected;
@@ -264,34 +265,16 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			selected = !selected;
 			if (selected) {
-				textArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+				textArea.setFont(RSyntaxTextArea.getDefaultFont());
 			}
 			else {
-				textArea.setFont(null);
+				Font font = new Font("Dialog", Font.PLAIN, 13);
+				textArea.setFont(font);
 			}
 		}
 
 	}
-*/
 
-/* Removed to keep size of demo applet down
-	private class RtlAction extends AbstractAction {
-
-		public RtlAction() {
-			putValue(NAME, "Right-to-Left Orientation");
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			if (scrollPane.getComponentOrientation().isLeftToRight()) {
-				scrollPane.applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-			}
-			else {
-				scrollPane.applyComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-			}
-		}
-
-	}
-*/
 
 	private class ToggleAntiAliasingAction extends AbstractAction {
 
