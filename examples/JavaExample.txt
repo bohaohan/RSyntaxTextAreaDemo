@@ -1,32 +1,28 @@
-package com.mycompany.demo;
-
-/**
- * An example class.
- *
- * @author Your Name
- * http://www.example.com
- */
 public class ExampleCode {
 
-   private int value;
-
-   /**
-    * Creates a new example.
-    *
-    * @param value A value to use in the example.
-    */
    public ExampleCode(int value) {
       this.value = value;
    }
 
-   public void doWork() {
-      // Very important work gets done here.
-      System.out.println("My value is: \"" + value + "\"");
+   /**
+    * Returns the value of x.
+    This value is
+    * computationally expensive.
+    * <ul>
+    * <li>one
+    * <li>two
+    * <li>three
+    * </ul>
+    * @param one The first param.
+    * @param two The second one.
+    * @unknown What is this?
+    * @param three The third one.
+    * @return The answer.
+    */
+   public String getX() {
+      String str;
+      
+      return "Hello world!";
    }
 
-   public static void main(String[] args) {
-      ExampleCode example = new ExampleCode(5);
-      example.doWork();
-   }
-
-}
+   
