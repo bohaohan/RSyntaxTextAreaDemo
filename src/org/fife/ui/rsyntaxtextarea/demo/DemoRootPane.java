@@ -1,6 +1,5 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
-//import java.awt.ComponentOrientation;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -11,7 +10,6 @@ import javax.swing.event.*;
 
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
-import org.fife.ui.rsyntaxtextarea.SyntaxScheme;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
@@ -117,10 +115,10 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.requestFocusInWindow();
 		textArea.setMarkOccurrences(true);
 		textArea.setTextAntiAliasHint("VALUE_TEXT_ANTIALIAS_ON");
-try {
-SyntaxScheme scheme = SyntaxScheme.load(textArea.getFont(), new java.io.FileInputStream("C:/temp/eclipse.xml"));
-textArea.setSyntaxScheme(scheme);
-} catch (Exception e) { e.printStackTrace(); }
+//try {
+//SyntaxScheme scheme = SyntaxScheme.load(textArea.getFont(), new java.io.FileInputStream("C:/temp/eclipse.xml"));
+//textArea.setSyntaxScheme(scheme);
+//} catch (Exception e) { e.printStackTrace(); }
 		return textArea;
 	}
 
