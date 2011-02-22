@@ -62,7 +62,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_MXML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -181,7 +181,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 1.3" +
+					"<br>Version 1.5.0" +
 					"<br>Licensed under the LGPL",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
