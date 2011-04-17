@@ -89,6 +89,8 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new MarkOccurrencesAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
+		cbItem = new JCheckBoxMenuItem(new TabLinesAction());
+		menu.add(cbItem);
 //		cbItem = new JCheckBoxMenuItem(new RtlAction());
 //		menu.add(cbItem);
 		mb.add(menu);
@@ -269,6 +271,22 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 				Font font = new Font("Dialog", Font.PLAIN, 13);
 				textArea.setFont(font);
 			}
+		}
+
+	}
+
+
+	private class TabLinesAction extends AbstractAction {
+
+		private boolean selected;
+
+		public TabLinesAction() {
+			putValue(NAME, "Tab Lines");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			selected = !selected;
+			textArea.setPaintTabLines(selected);
 		}
 
 	}
