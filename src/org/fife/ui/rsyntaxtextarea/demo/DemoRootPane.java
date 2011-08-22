@@ -85,6 +85,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new WordWrapAction());
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new ToggleAntiAliasingAction());
+		cbItem.setSelected(true);
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new MarkOccurrencesAction());
 		cbItem.setSelected(true);
@@ -116,7 +117,13 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
 		textArea.setMarkOccurrences(true);
-		textArea.setTextAntiAliasHint("VALUE_TEXT_ANTIALIAS_ON");
+		textArea.setAntiAliasingEnabled(true);
+//textArea.setFont(new Font("VeraMono.ttf", Font.PLAIN, 13));
+//for (int i=0; i<textArea.getSyntaxScheme().styles.length; i++) {
+//	if (textArea.getSyntaxScheme().styles[i]!=null) {
+//		textArea.getSyntaxScheme().styles[i].font = textArea.getFont();
+//	}
+//}
 //try {
 //SyntaxScheme scheme = SyntaxScheme.load(textArea.getFont(), new java.io.FileInputStream("C:/temp/eclipse.xml"));
 //textArea.setSyntaxScheme(scheme);
@@ -294,16 +301,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 	private class ToggleAntiAliasingAction extends AbstractAction {
 
-		private boolean selected;
-
 		public ToggleAntiAliasingAction() {
 			putValue(NAME, "Anti-Aliasing");
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			selected = !selected;
-			String hint = selected ? "VALUE_TEXT_ANTIALIAS_ON" : null;
-			textArea.setTextAntiAliasHint(hint);
+			textArea.setAntiAliasingEnabled(!textArea.getAntiAliasingEnabled());
 		}
 
 	}
