@@ -1,6 +1,5 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -67,7 +66,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		mb.add(menu);
 
 		menu = new JMenu("View");
-		JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(new MonospacedFontAction());
+		JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(new CodeFoldingAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new ViewLineHighlightAction());
@@ -191,7 +190,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 1.5.0" +
+					"<br>Version 2.0.0" +
 					"<br>Licensed under the LGPL",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
@@ -248,6 +247,19 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
+	private class CodeFoldingAction extends AbstractAction {
+
+		public CodeFoldingAction() {
+			putValue(NAME, "Code Folding");
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			textArea.setCodeFoldingEnabled(!textArea.isCodeFoldingEnabled());
+		}
+
+	}
+
+
 	private class MarkOccurrencesAction extends AbstractAction {
 
 		public MarkOccurrencesAction() {
@@ -256,29 +268,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		public void actionPerformed(ActionEvent e) {
 			textArea.setMarkOccurrences(!textArea.getMarkOccurrences());
-		}
-
-	}
-
-
-	private class MonospacedFontAction extends AbstractAction {
-
-		private boolean selected;
-
-		public MonospacedFontAction() {
-			putValue(NAME, "Monospaced Font");
-			selected = true;
-		}
-
-		public void actionPerformed(ActionEvent e) {
-			selected = !selected;
-			if (selected) {
-				textArea.setFont(RSyntaxTextArea.getDefaultFont());
-			}
-			else {
-				Font font = new Font("Dialog", Font.PLAIN, 13);
-				textArea.setFont(font);
-			}
 		}
 
 	}
