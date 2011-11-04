@@ -2,6 +2,8 @@ package org.fife.ui.rsyntaxtextarea.demo;
 
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import javax.swing.*;
@@ -9,6 +11,7 @@ import javax.swing.event.*;
 
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
+import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
@@ -38,6 +41,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		gutter.setBookmarkIcon(new ImageIcon(url));
 		getContentPane().add(scrollPane);
 		setJMenuBar(createMenuBar());
+		new ThemeAction("foo", "/dark.xml").actionPerformed(null);
 	}
 
 
@@ -61,7 +65,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_MXML, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -91,8 +95,13 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		menu.add(cbItem);
 		cbItem = new JCheckBoxMenuItem(new TabLinesAction());
 		menu.add(cbItem);
-//		cbItem = new JCheckBoxMenuItem(new RtlAction());
-//		menu.add(cbItem);
+		mb.add(menu);
+
+		menu = new JMenu("Themes");
+		menu.add(new JMenuItem(new ThemeAction("Default", "/default.xml")));
+		menu.add(new JMenuItem(new ThemeAction("Dark", "/dark.xml")));
+		menu.add(new JMenuItem(new ThemeAction("Eclipse", "/eclipse.xml")));
+		menu.add(new JMenuItem(new ThemeAction("Visual Studio", "/vs.xml")));
 		mb.add(menu);
 
 		menu = new JMenu("Help");
@@ -124,10 +133,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 //		textArea.getSyntaxScheme().styles[i].font = textArea.getFont();
 //	}
 //}
-//try {
-//SyntaxScheme scheme = SyntaxScheme.load(textArea.getFont(), new java.io.FileInputStream("C:/temp/eclipse.xml"));
-//textArea.setSyntaxScheme(scheme);
-//} catch (Exception e) { e.printStackTrace(); }
 		return textArea;
 	}
 
@@ -175,7 +180,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 			textArea.setCaretPosition(0);
 		} catch (RuntimeException re) {
 			throw re; // FindBugs
-		} catch (Exception e) {
+		} catch (Exception e) { // Never happens
 			textArea.setText("Type here to see syntax highlighting");
 		}
 	}
@@ -284,6 +289,28 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			selected = !selected;
 			textArea.setPaintTabLines(selected);
+		}
+
+	}
+
+
+	private class ThemeAction extends AbstractAction {
+
+		private String xml;
+
+		public ThemeAction(String name, String xml) {
+			putValue(NAME, name);
+			this.xml = xml;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			InputStream in = getClass().getResourceAsStream(xml);
+			try {
+				Theme theme = Theme.load(in);
+				theme.apply(textArea);
+			} catch (IOException ioe) {
+				ioe.printStackTrace();
+			}
 		}
 
 	}
