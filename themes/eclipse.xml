@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE RSyntaxTheme SYSTEM "theme.dtd">
 
 <!--
 	Theme that mimics Eclipse's defaults.
 -->
 <RSyntaxTheme version="1.0">
 
-   <!-- Don't specify family attribute to take system monospaced default. -->
-   <baseFont family="Consolas" size="12"/>
+   <!-- Specify family="..." attribute to override system default monospaced. -->
+   <baseFont size="12"/>
    
    <!--  General editor colors. -->
    <background color="ffffff"/>

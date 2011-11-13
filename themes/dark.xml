@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE RSyntaxTheme SYSTEM "theme.dtd">
 
 <!--
 	Dark theme based off of Notepad++'s Obsidian theme.
 -->
 <RSyntaxTheme version="1.0">
 
-   <!-- Don't specify family attribute to take system monospaced default. -->
-   <baseFont family="Consolas" size="12"/>
+   <!-- Specify family="..." attribute to override system default monospaced. -->
+   <baseFont size="12"/>
    
    <!--  General editor colors. -->
    <background color="293134"/>
    <caret color="c1cbc2"/>
-   <selection bg="404E51"/>
+   <selection bg="404E51" roundedEdges="true"/>
    <currentLineHighlight color="2F393C" fade="false"/>
    <marginLine fg="394448"/>
    <markAllHighlight color="6b8189"/> <!-- TODO: Fix me -->

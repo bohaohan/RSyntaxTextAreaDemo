@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE RSyntaxTheme SYSTEM "theme.dtd">
 
 <!--
 	RSyntaxTextArea's default theme.
 -->
 <RSyntaxTheme version="1.0">
 
-   <!-- Don't specify family attribute to take system monospaced default. -->
+   <!-- Specify family="..." attribute to override system default monospaced. -->
    <baseFont size="12"/>
    
    <!--  General editor colors. -->
