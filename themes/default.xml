@@ -28,9 +28,11 @@
    <tokenStyles>
       <style token="IDENTIFIER" fg="000000"/>
       <style token="RESERVED_WORD" fg="0000ff" bold="true"/>
+      <style token="ANNOTATION" fg="808080"/>
       <style token="COMMENT_DOCUMENTATION" fg="a40000" italic="true"/>
       <style token="COMMENT_EOL" fg="008000" italic="true"/>
       <style token="COMMENT_MULTILINE" fg="008000" italic="true"/>
+      <style token="COMMENT_KEYWORD" fg="ff9900" italic="true"/>
       <style token="DATA_TYPE" fg="008080" bold="true"/>
       <style token="FUNCTION" fg="ad8000"/>
       <style token="LITERAL_BOOLEAN" fg="0000ff" bold="true"/>
@@ -43,6 +45,7 @@
       <style token="MARKUP_TAG_DELIMITER" fg="ff0000"/>
       <style token="MARKUP_TAG_NAME" fg="0000ff"/>
       <style token="MARKUP_TAG_ATTRIBUTE" fg="3f7f7f"/>
+      <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="DC009C"/>
       <style token="OPERATOR" fg="000000"/>
       <style token="PREPROCESSOR" fg="808080"/>
       <style token="SEPARATOR" fg="ff0000"/>
