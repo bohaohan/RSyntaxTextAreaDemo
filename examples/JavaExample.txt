@@ -11,7 +11,7 @@ public class ExampleCode {
    private int value;
 
    /**
-    * Creates a new example.
+    * Creates a new <code>ExampleCode</code>.
     *
     * @param value A value to use in the example.
     */

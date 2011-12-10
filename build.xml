@@ -61,6 +61,8 @@
 				<exclude name="org/fife/ui/rsyntaxtextarea/modes/**"/>
 			</fileset>
 			<fileset dir="../RSyntaxTextArea/i18n"/>
+			<fileset file="../RSyntaxTextArea/src/theme.dtd"/>
+			<fileset dir="../RSyntaxTextArea/themes"/>
 			<fileset dir="../RSyntaxTextArea/ant-classes">
 				<include name="org/fife/ui/rsyntaxtextarea/modes/AbstractMarkupTokenMaker.class"/>
 				<include name="org/fife/ui/rsyntaxtextarea/modes/CTokenMaker.class"/>
