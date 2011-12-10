@@ -28,11 +28,13 @@
    <tokenStyles>
       <style token="IDENTIFIER" fg="E0E2E4"/>
       <style token="RESERVED_WORD" fg="93C763" bold="true"/>
+      <style token="RESERVED_WORD_2" fg="93C763" bold="true"/>
       <style token="ANNOTATION" fg="E8E2B7"/>
       <style token="COMMENT_DOCUMENTATION" fg="6C788C" italic="false"/>
       <style token="COMMENT_EOL" fg="66747B" italic="false"/>
       <style token="COMMENT_MULTILINE" fg="66747B" italic="false"/>
       <style token="COMMENT_KEYWORD" fg="ae9fbf" italic="false"/>
+      <style token="COMMENT_MARKUP" fg="ffffff" italic="false"/>
       <style token="FUNCTION" fg="E0E2E4"/>
       <style token="DATA_TYPE" fg="678CB1" bold="true"/>
       <style token="LITERAL_BOOLEAN" fg="93C763" bold="true"/>
@@ -45,9 +47,10 @@
       <style token="MARKUP_TAG_DELIMITER" fg="678CB1"/>
       <style token="MARKUP_TAG_NAME" fg="ABBFD3"/>
       <style token="MARKUP_TAG_ATTRIBUTE" fg="B3B689"/>
-      <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="EC7600"/>
+      <style token="MARKUP_TAG_ATTRIBUTE_VALUE" fg="ff0000"/>
       <style token="OPERATOR" fg="E8E2B7"/>
       <style token="PREPROCESSOR" fg="A082BD"/>
+      <style token="REGEX" fg="E0E2E4"/>
       <style token="SEPARATOR" fg="E8E2B7"/>
       <style token="VARIABLE" fg="ae9fbf" bold="true"/>
       <style token="WHITESPACE" fg="E0E2E4"/>
