@@ -41,7 +41,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		gutter.setBookmarkIcon(new ImageIcon(url));
 		getContentPane().add(scrollPane);
 		setJMenuBar(createMenuBar());
-		new ThemeAction("foo", "/dark.xml").actionPerformed(null);
 	}
 
 
