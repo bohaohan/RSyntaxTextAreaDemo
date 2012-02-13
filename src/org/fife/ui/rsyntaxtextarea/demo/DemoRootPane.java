@@ -126,6 +126,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setMarkOccurrences(true);
 		textArea.setAntiAliasingEnabled(true);
 		textArea.setCodeFoldingEnabled(true);
+		textArea.setClearWhitespaceLinesEnabled(false);
 //textArea.setFont(new Font("VeraMono.ttf", Font.PLAIN, 13));
 //for (int i=0; i<textArea.getSyntaxScheme().styles.length; i++) {
 //	if (textArea.getSyntaxScheme().styles[i]!=null) {
