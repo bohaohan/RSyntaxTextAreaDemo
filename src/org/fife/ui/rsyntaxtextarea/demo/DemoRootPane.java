@@ -1,7 +1,6 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,8 +14,6 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
 import org.fife.ui.rtextarea.Gutter;
 import org.fife.ui.rtextarea.RTextScrollPane;
-import org.fife.ui.rtextarea.SearchContext;
-import org.fife.ui.rtextarea.SearchEngine;
 
 
 /**
@@ -72,16 +69,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		mb.add(menu);
 
 		menu = new JMenu("View");
-JMenuItem searchItem = new JMenuItem("Search");
-searchItem.addActionListener(new ActionListener() {
-	public void actionPerformed(ActionEvent e) {
-		SearchContext context = new SearchContext("r(o+)t");
-		context.setRegularExpression(true);
-		context.setReplaceWith("$1");
-		SearchEngine.replaceAll(textArea, context);
-	}
-});
-menu.add(searchItem);
 		JCheckBoxMenuItem cbItem = new JCheckBoxMenuItem(new CodeFoldingAction());
 		cbItem.setSelected(true);
 		menu.add(cbItem);
@@ -137,7 +124,6 @@ menu.add(searchItem);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();
 		textArea.setMarkOccurrences(true);
-		textArea.setAntiAliasingEnabled(true);
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
 //textArea.setFont(new Font("VeraMono.ttf", Font.PLAIN, 13));
@@ -209,7 +195,7 @@ menu.add(searchItem);
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 2.0.2" +
+					"<br>Version 2.0.3" +
 					"<br>Licensed under a modified BSD license",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
