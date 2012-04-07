@@ -97,6 +97,7 @@
 		<zip destfile="./rsyntaxtextarea_demo_${version}_Source.zip">
 			<fileset dir=".">
 				<include name="src/**"/>
+				<include name="img/**"/>
 				<include name="examples/**"/>
 				<include name="build.xml"/>
 			</fileset>
