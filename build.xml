@@ -28,7 +28,7 @@
 
 
 	<!-- Set global properties for this build. -->
-	<property name="version"          value="2.0.3"/>
+	<property name="version"          value="2.0.4"/>
 	<property name="source-dir"       location="src"/>
 	<property name="class-dir"        location="ant-classes"/>
 	<property name="dist-dir"         location="dist"/>
@@ -44,7 +44,7 @@
 		<javac srcdir="${source-dir}" destdir="${class-dir}"
 			classpath="../RSyntaxTextArea/dist/rsyntaxtextarea.jar"
 			deprecation="yes" debug="${debug}" debuglevel="${debuglevel}"
-			source="${java-level}" target="${java-level}"/>
+			source="${java-level}" target="${java-level}" includeantruntime="false"/>
 	</target>
 
 
