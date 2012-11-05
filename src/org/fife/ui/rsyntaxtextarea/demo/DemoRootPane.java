@@ -59,12 +59,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addItem("C", "CExample.txt", SYNTAX_STYLE_C, bg, menu);
-		addItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVA, bg, menu);
-		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
+		addItem("C", "CExample.txt", SYNTAX_STYLE_NSIS, bg, menu);
+		addItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
+		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PHP, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
-		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_PHP, bg, menu);
+		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_HTML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -95,7 +95,16 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new TabLinesAction());
 		menu.add(cbItem);
 		mb.add(menu);
-
+menu.add(new AbstractAction("Toggle Editable") {
+	public void actionPerformed(ActionEvent e) {
+		textArea.setEditable(!textArea.isEditable());
+	}
+});
+menu.add(new AbstractAction("Toggle Enabled") {
+	public void actionPerformed(ActionEvent e) {
+		textArea.setEnabled(!textArea.isEnabled());
+	}
+});
 		menu = new JMenu("Themes");
 		menu.add(new JMenuItem(new ThemeAction("Default", "/default.xml")));
 		menu.add(new JMenuItem(new ThemeAction("Dark", "/dark.xml")));
@@ -126,12 +135,6 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setMarkOccurrences(true);
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
-//textArea.setFont(new Font("VeraMono.ttf", Font.PLAIN, 13));
-//for (int i=0; i<textArea.getSyntaxScheme().styles.length; i++) {
-//	if (textArea.getSyntaxScheme().styles[i]!=null) {
-//		textArea.getSyntaxScheme().styles[i].font = textArea.getFont();
-//	}
-//}
 		return textArea;
 	}
 
@@ -195,7 +198,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 2.0.3" +
+					"<br>Version 2.0.4" +
 					"<br>Licensed under a modified BSD license",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
