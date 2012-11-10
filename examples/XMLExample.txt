@@ -5,3 +5,11 @@
       <three foo='yes please'><![CDATA[text content]]></three>
    </two>
 </one>
+<fooey />
+<one>
+   <fooey-again />
+   <!-- Comment section -->
+   <two attr="another value">
+      <three foo='no, thank you'><![CDATA[text content]]></three>
+   </two>
+</one>
