@@ -198,7 +198,7 @@ menu.add(new AbstractAction("Toggle Enabled") {
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 2.0.4" +
+					"<br>Version 2.0.5" +
 					"<br>Licensed under a modified BSD license",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
