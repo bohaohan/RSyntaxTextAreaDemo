@@ -59,7 +59,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addItem("C", "CExample.txt", SYNTAX_STYLE_SCALA, bg, menu);
+		addItem("C", "CExample.txt", SYNTAX_STYLE_JSON, bg, menu);
 		addItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
 		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
@@ -95,16 +95,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		cbItem = new JCheckBoxMenuItem(new TabLinesAction());
 		menu.add(cbItem);
 		mb.add(menu);
-menu.add(new AbstractAction("Toggle Editable") {
-	public void actionPerformed(ActionEvent e) {
-		textArea.setEditable(!textArea.isEditable());
-	}
-});
-menu.add(new AbstractAction("Toggle Enabled") {
-	public void actionPerformed(ActionEvent e) {
-		textArea.setEnabled(!textArea.isEnabled());
-	}
-});
+
 		menu = new JMenu("Themes");
 		menu.add(new JMenuItem(new ThemeAction("Default", "/default.xml")));
 		menu.add(new JMenuItem(new ThemeAction("Dark", "/dark.xml")));
@@ -135,9 +126,6 @@ menu.add(new AbstractAction("Toggle Enabled") {
 		textArea.setMarkOccurrences(true);
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
-javax.swing.text.DefaultCaret caret = new javax.swing.text.DefaultCaret();
-caret.setBlinkRate(500);
-textArea.setCaret(caret);
 		return textArea;
 	}
 
