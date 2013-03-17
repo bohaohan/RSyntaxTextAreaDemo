@@ -44,10 +44,19 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	}
 
 
-	private void addItem(String name, String res, String style, ButtonGroup bg,
-			JMenu menu) {
+	private void addSyntaxItem(String name, String res, String style,
+			ButtonGroup bg, JMenu menu) {
 		JRadioButtonMenuItem item = new JRadioButtonMenuItem(
 				new ChangeSyntaxStyleAction(name, res, style));
+		bg.add(item);
+		menu.add(item);
+	}
+
+
+	private void addThemeItem(String name, String themeXml, ButtonGroup bg,
+			JMenu menu) {
+		JRadioButtonMenuItem item = new JRadioButtonMenuItem(
+				new ThemeAction(name, themeXml));
 		bg.add(item);
 		menu.add(item);
 	}
@@ -59,12 +68,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addItem("C", "CExample.txt", SYNTAX_STYLE_JSON, bg, menu);
-		addItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
-		addItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
-		addItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
-		addItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		addSyntaxItem("C", "CExample.txt", SYNTAX_STYLE_JSON, bg, menu);
+		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
+		addSyntaxItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
+		addSyntaxItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
+		addSyntaxItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
+		addSyntaxItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -96,11 +105,14 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		menu.add(cbItem);
 		mb.add(menu);
 
+		bg = new ButtonGroup();
 		menu = new JMenu("Themes");
-		menu.add(new JMenuItem(new ThemeAction("Default", "/default.xml")));
-		menu.add(new JMenuItem(new ThemeAction("Dark", "/dark.xml")));
-		menu.add(new JMenuItem(new ThemeAction("Eclipse", "/eclipse.xml")));
-		menu.add(new JMenuItem(new ThemeAction("Visual Studio", "/vs.xml")));
+		addThemeItem("Default", "/default.xml", bg, menu);
+		addThemeItem("Default (Alternate)", "/default-alt.xml", bg, menu);
+		addThemeItem("Dark", "/dark.xml", bg, menu);
+		addThemeItem("Eclipse", "/eclipse.xml", bg, menu);
+		addThemeItem("IDEA", "/idea.xml", bg, menu);
+		addThemeItem("Visual Studio", "/vs.xml", bg, menu);
 		mb.add(menu);
 
 		menu = new JMenu("Help");
@@ -126,6 +138,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setMarkOccurrences(true);
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
+		//textArea.setWhitespaceVisible(true);
 		return textArea;
 	}
 
@@ -189,7 +202,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 2.0.5" +
+					"<br>Version 2.0.7" +
 					"<br>Licensed under a modified BSD license",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
