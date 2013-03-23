@@ -68,7 +68,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addSyntaxItem("C", "CExample.txt", SYNTAX_STYLE_JSON, bg, menu);
+		addSyntaxItem("C", "CExample.txt", SYNTAX_STYLE_C, bg, menu);
 		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
 		addSyntaxItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addSyntaxItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
@@ -132,6 +132,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	 */
 	private RSyntaxTextArea createTextArea() {
 		RSyntaxTextArea textArea = new RSyntaxTextArea(25, 70);
+		textArea.setTabSize(3);
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
 		textArea.requestFocusInWindow();

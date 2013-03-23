@@ -11,5 +11,6 @@
    <!-- Comment section -->
    <two attr="another value">
       <three foo='no, thank you'><![CDATA[text content]]></three>
+      <four>Barnum &amp; Bailey Circus</four>
    </two>
 </one>
