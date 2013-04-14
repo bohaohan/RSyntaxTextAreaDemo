@@ -69,7 +69,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
 		addSyntaxItem("C", "CExample.txt", SYNTAX_STYLE_C, bg, menu);
-		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVASCRIPT, bg, menu);
+		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVA, bg, menu);
 		addSyntaxItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addSyntaxItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addSyntaxItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
@@ -140,6 +140,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
 		//textArea.setWhitespaceVisible(true);
+		//textArea.setPaintMatchedBracketPair(true);
 		return textArea;
 	}
 
