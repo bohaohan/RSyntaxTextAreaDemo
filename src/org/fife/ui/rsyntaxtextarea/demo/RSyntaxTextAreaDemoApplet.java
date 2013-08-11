@@ -24,6 +24,7 @@ public class RSyntaxTextAreaDemoApplet extends JApplet {
 	}
 
 
+	@Override
 	public void start() {
 		super.start();
 		((DemoRootPane)getRootPane()).focusTextArea();
