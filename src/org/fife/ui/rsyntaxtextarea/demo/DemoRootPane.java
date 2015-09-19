@@ -79,15 +79,16 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
 		addSyntaxItem("C",    "CExample.txt", SYNTAX_STYLE_C, bg, menu);
+		addSyntaxItem("CSS",  "CssExample.txt", SYNTAX_STYLE_CSS, bg, menu);
 		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVA, bg, menu);
 		addSyntaxItem("JSON", "JsonExample.txt", SYNTAX_STYLE_JSON, bg, menu);
+		addSyntaxItem("Less", "LessExample.txt", SYNTAX_STYLE_LESS, bg, menu);
 		addSyntaxItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
 		addSyntaxItem("PHP",  "PhpExample.txt", SYNTAX_STYLE_PHP, bg, menu);
 		addSyntaxItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
 		addSyntaxItem("SQL",  "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addSyntaxItem("CSS",  "XMLExample.txt", SYNTAX_STYLE_CSS, bg, menu);
-		addSyntaxItem("Less", "XMLExample.txt", SYNTAX_STYLE_LESS, bg, menu);
-		menu.getItem(1).setSelected(true);
+		addSyntaxItem("XML",  "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		menu.getItem(2).setSelected(true);
 		mb.add(menu);
 
 		menu = new JMenu("View");
