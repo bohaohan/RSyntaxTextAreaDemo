@@ -154,7 +154,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setClearWhitespaceLinesEnabled(false);
 // The stuff below is just from debugging random issues that have come up in the forums.
 // TODO: Remove this stuff
-System.out.println(textArea.getMargin());
+//System.out.println(textArea.getMargin());
 //textArea.setMargin(new java.awt.Insets(1, 15, 1, 5));
 InputMap im = textArea.getInputMap();
 ActionMap am = textArea.getActionMap();
