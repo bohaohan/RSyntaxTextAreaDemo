@@ -1,14 +1,20 @@
 package org.fife.ui.rsyntaxtextarea.demo;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+
 import javax.swing.*;
 import javax.swing.event.*;
+//import javax.swing.text.StyleConstants;
 
+import org.fife.ui.rsyntaxtextarea.ErrorStrip;
+import org.fife.ui.rsyntaxtextarea.RSyntaxTextAreaEditorKit;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.Theme;
@@ -34,12 +40,16 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea = createTextArea();
 		setText("JavaExample.txt");
 		textArea.setSyntaxEditingStyle(SYNTAX_STYLE_JAVA);
+
 		scrollPane = new RTextScrollPane(textArea, true);
 		Gutter gutter = scrollPane.getGutter();
 		gutter.setBookmarkingEnabled(true);
-		URL url = getClass().getClassLoader().getResource("bookmark.png");
+		URL url = getClass().getResource("bookmark.png");
 		gutter.setBookmarkIcon(new ImageIcon(url));
 		getContentPane().add(scrollPane);
+		ErrorStrip errorStrip = new ErrorStrip(textArea);
+//errorStrip.setBackground(java.awt.Color.blue);
+		getContentPane().add(errorStrip, BorderLayout.LINE_END);
 		setJMenuBar(createMenuBar());
 	}
 
@@ -68,12 +78,15 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		JMenu menu = new JMenu("Language");
 		ButtonGroup bg = new ButtonGroup();
-		addSyntaxItem("C", "CExample.txt", SYNTAX_STYLE_C, bg, menu);
+		addSyntaxItem("C",    "CExample.txt", SYNTAX_STYLE_C, bg, menu);
 		addSyntaxItem("Java", "JavaExample.txt", SYNTAX_STYLE_JAVA, bg, menu);
+		addSyntaxItem("JSON", "JsonExample.txt", SYNTAX_STYLE_JSON, bg, menu);
 		addSyntaxItem("Perl", "PerlExample.txt", SYNTAX_STYLE_PERL, bg, menu);
+		addSyntaxItem("PHP",  "PhpExample.txt", SYNTAX_STYLE_PHP, bg, menu);
 		addSyntaxItem("Ruby", "RubyExample.txt", SYNTAX_STYLE_RUBY, bg, menu);
-		addSyntaxItem("SQL", "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
-		addSyntaxItem("XML", "XMLExample.txt", SYNTAX_STYLE_XML, bg, menu);
+		addSyntaxItem("SQL",  "SQLExample.txt", SYNTAX_STYLE_SQL, bg, menu);
+		addSyntaxItem("CSS",  "XMLExample.txt", SYNTAX_STYLE_CSS, bg, menu);
+		addSyntaxItem("Less", "XMLExample.txt", SYNTAX_STYLE_LESS, bg, menu);
 		menu.getItem(1).setSelected(true);
 		mb.add(menu);
 
@@ -107,12 +120,12 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 
 		bg = new ButtonGroup();
 		menu = new JMenu("Themes");
-		addThemeItem("Default", "/default.xml", bg, menu);
-		addThemeItem("Default (Alternate)", "/default-alt.xml", bg, menu);
-		addThemeItem("Dark", "/dark.xml", bg, menu);
-		addThemeItem("Eclipse", "/eclipse.xml", bg, menu);
-		addThemeItem("IDEA", "/idea.xml", bg, menu);
-		addThemeItem("Visual Studio", "/vs.xml", bg, menu);
+		addThemeItem("Default", "default.xml", bg, menu);
+		addThemeItem("Default (System Selection)", "default-alt.xml", bg, menu);
+		addThemeItem("Dark", "dark.xml", bg, menu);
+		addThemeItem("Eclipse", "eclipse.xml", bg, menu);
+		addThemeItem("IDEA", "idea.xml", bg, menu);
+		addThemeItem("Visual Studio", "vs.xml", bg, menu);
 		mb.add(menu);
 
 		menu = new JMenu("Help");
@@ -131,7 +144,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	 * @return The text area.
 	 */
 	private RSyntaxTextArea createTextArea() {
-		RSyntaxTextArea textArea = new RSyntaxTextArea(25, 70);
+		final RSyntaxTextArea textArea = new RSyntaxTextArea(25, 70);
 		textArea.setTabSize(3);
 		textArea.setCaretPosition(0);
 		textArea.addHyperlinkListener(this);
@@ -139,8 +152,33 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		textArea.setMarkOccurrences(true);
 		textArea.setCodeFoldingEnabled(true);
 		textArea.setClearWhitespaceLinesEnabled(false);
-		//textArea.setWhitespaceVisible(true);
-		//textArea.setPaintMatchedBracketPair(true);
+// The stuff below is just from debugging random issues that have come up in the forums.
+// TODO: Remove this stuff
+System.out.println(textArea.getMargin());
+//textArea.setMargin(new java.awt.Insets(1, 15, 1, 5));
+InputMap im = textArea.getInputMap();
+ActionMap am = textArea.getActionMap();
+im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), "decreaseFontSize");
+am.put("decreaseFontSize", new RSyntaxTextAreaEditorKit.DecreaseFontSizeAction());
+im.put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0), "increaseFontSize");
+am.put("increaseFontSize", new RSyntaxTextAreaEditorKit.IncreaseFontSizeAction());
+//((org.fife.ui.rsyntaxtextarea.RSyntaxTextAreaHighlighter)textArea.getHighlighter()).setDrawsLayeredHighlights(false);
+//textArea.setBackground(new java.awt.Color(0xff,0x80,0x80, 0x30));
+		try {
+//textArea.setBackgroundImage(javax.imageio.ImageIO.read(new java.io.File("D:/temp/homer.jpg")));
+		} catch (Exception e) { e.printStackTrace(); }
+		
+//im.put(KeyStroke.getKeyStroke('x'), "x");
+//am.put("x", new AbstractAction() {
+//	public void actionPerformed(ActionEvent e) {
+//		RSyntaxDocument doc = (RSyntaxDocument)textArea.getDocument();
+//		javax.swing.text.Style style = doc.getStyle("comment");
+//		java.awt.Color fg = Math.random() > 0.5 ? java.awt.Color.blue : java.awt.Color.red;
+//		StyleConstants.setForeground(style, fg);
+//	}
+//});
+//textArea.setSelectedTextColor(java.awt.Color.white);
+//textArea.setUseSelectedTextColor(true);
 		return textArea;
 	}
 
@@ -178,11 +216,10 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 	 * @param resource The resource to load.
 	 */
 	private void setText(String resource) {
-		ClassLoader cl = getClass().getClassLoader();
 		BufferedReader r = null;
 		try {
 			r = new BufferedReader(new InputStreamReader(
-					cl.getResourceAsStream(resource), "UTF-8"));
+					getClass().getResourceAsStream(resource), "UTF-8"));
 			textArea.read(r, null);
 			r.close();
 			textArea.setCaretPosition(0);
@@ -204,7 +241,7 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		public void actionPerformed(ActionEvent e) {
 			JOptionPane.showMessageDialog(DemoRootPane.this,
 					"<html><b>RSyntaxTextArea</b> - A Swing syntax highlighting text component" +
-					"<br>Version 2.0.7" +
+					"<br>Version 2.5.8" +
 					"<br>Licensed under a modified BSD license",
 					"About RSyntaxTextArea",
 					JOptionPane.INFORMATION_MESSAGE);
@@ -313,10 +350,14 @@ public class DemoRootPane extends JRootPane implements HyperlinkListener,
 		}
 
 		public void actionPerformed(ActionEvent e) {
-			InputStream in = getClass().getResourceAsStream(xml);
+			InputStream in = getClass().
+				getResourceAsStream("/org/fife/ui/rsyntaxtextarea/themes/" + xml);
 			try {
 				Theme theme = Theme.load(in);
 				theme.apply(textArea);
+//	try {
+//		textArea.setBackgroundImage(javax.imageio.ImageIO.read(new java.io.File("D:/temp/homer.jpg")));
+//				} catch (Exception ex) { ex.printStackTrace(); }
 			} catch (IOException ioe) {
 				ioe.printStackTrace();
 			}
